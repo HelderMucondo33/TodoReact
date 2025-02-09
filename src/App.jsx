@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import "./App.css";
-import Todo from './components/todo';
+import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
 
 function App() {
@@ -38,12 +38,16 @@ function App() {
     setTodos(newTodos);
   };
 
+  const removeTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
   return (
     <div className='app'>
       <h1>Lista de tarefas</h1>
       <div className="todo-list">
         {todos.map((todo) => (
-          <Todo key={todo.id} todo={todo} />
+          <Todo key={todo.id} todo={todo} removeTodo={removeTodo} />
         ))}
       </div>
       <TodoForm addTodo={addTodo} />
