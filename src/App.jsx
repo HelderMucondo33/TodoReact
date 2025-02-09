@@ -4,38 +4,51 @@ import Todo from './components/todo';
 import TodoForm from './components/TodoForm';
 
 function App() {
-  
   const [todos, setTodos] = useState([
     {
-      id:1,
+      id: 1,
       text: "acriar funcionalidade x no sistema",
-      category:"Trabalho",
-      isCompleted:false,
+      category: "Trabalho",
+      isCompleted: false,
     },
     {
-      id:2,
+      id: 2,
       text: "Ir para o ginasio",
-      category:"Pessoal",
-      isCompleted:false,
+      category: "Pessoal",
+      isCompleted: false,
     },
     {
-      id:3,
+      id: 3,
       text: "Estudar Matematica",
-      category:"Estudos",
-      isCompleted:false,
+      category: "Estudos",
+      isCompleted: false,
     },
   ]);
 
-  return <div className='app'>
+  const addTodo = (text, category) => {
+    const newTodos = [
+      ...todos,
+      {
+        id: Math.floor(Math.random() * 10000),
+        text,
+        category,
+        isCompleted: false,
+      },
+    ];
+    setTodos(newTodos);
+  };
+
+  return (
+    <div className='app'>
       <h1>Lista de tarefas</h1>
       <div className="todo-list">
-        {todos.map((todo)=> (
-         <Todo  todo = {todo} /> //passando a props
+        {todos.map((todo) => (
+          <Todo key={todo.id} todo={todo} />
         ))}
       </div>
-      <TodoForm />
+      <TodoForm addTodo={addTodo} />
     </div>
-  
+  );
 }
 
-export default App
+export default App;
